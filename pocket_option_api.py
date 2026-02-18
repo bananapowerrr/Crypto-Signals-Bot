@@ -341,24 +341,6 @@ class PocketOptionAPI:
         """
         self.message_handlers[event_name] = handler
 
-    async def get_available_assets(self) -> Dict[str, Any]:
-        """Return list of available assets.
-        Placeholder: real implementation should query Pocket Option REST or websocket
-        and return full list including OTC markers.
-        """
-        try:
-            # TODO: implement real asset retrieval from Pocket Option API
-            assets = [
-                {"symbol": "EURUSD", "is_otc": False},
-                {"symbol": "BTCUSD", "is_otc": False},
-                {"symbol": "GOLD", "is_otc": False},
-                {"symbol": "OTC_ASSET_1", "is_otc": True}
-            ]
-            return {"success": True, "assets": assets}
-        except Exception as e:
-            logger.error(f"Error fetching assets: {e}")
-            return {"success": False, "error": str(e)}
-
 
 # Example usage
 async def test_demo_trading():
