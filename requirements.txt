@@ -3,11 +3,9 @@ pandas==2.1.4
 numpy==1.26.2
 matplotlib==3.8.2
 python-dotenv==1.0.0
-aiohttp
-httpx
-cryptography
-pyjwt
-telegram
-flask
-websockets
-yfinance
+aiohttp==3.9.1
+httpx==0.25.2
+cryptography==41.0.7
+pyjwt==2.8.0
+websockets==12.0
+flask==3.0.0           # если используется Flask для веб-сервера (не обязательно для бота)
