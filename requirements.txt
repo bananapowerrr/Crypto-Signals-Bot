@@ -9,6 +9,4 @@ cryptography
 pyjwt
 flask
 websockets
-yfinance
-yookassa
 pypng

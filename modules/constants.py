@@ -1,11 +1,14 @@
-"""Конфигурация бота - все константы и настройки"""
+"""
+Constants module - все константы бота
+"""
 import os
-from datetime import timedelta, timezone
-from dotenv import load_dotenv
+from datetime import timezone, timedelta
 
+# Загрузка переменных окружения
+from dotenv import load_dotenv
 load_dotenv()
 
-# Основные настройки
+# Основные конфигурации
 BOT_TOKEN = os.getenv("BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
 ADMIN_USER_ID = int(os.getenv("ADMIN_USER_ID", "0"))
 SUPPORT_CONTACT = "@banana_pwr"
@@ -22,18 +25,18 @@ PROMO_CODE = "FRIENDUGAUIHALOD"
 # Выплата в процентах
 PAYOUT_PERCENT = 92
 
-# Команды бота по умолчанию (тарифы и платежи удалены - бот работает бесплатно)
+
+# Команды бота по умолчанию
 DEFAULT_BOT_COMMANDS = [
     ("start", "🏠 Главное меню"),
     ("settings", "⚙️ Настройки"),
     ("short", "⚡ SHORT сигнал (1-5 мин)"),
     ("long", "🔵 LONG сигнал (1-4 часа)"),
     ("my_stats", "📊 Моя статистика"),
-    ("referral", "💰 Реферальная программа"),
     ("help", "❓ Помощь и инструкции"),
 ]
 
-# Система мультиязычности (тарифы и платежи удалены - бот работает бесплатно)
+# Система мультиязычности
 TRANSLATIONS = {
     'ru': {
         'choose_language': '🌍 Выберите язык / Choose language:',
@@ -125,37 +128,9 @@ TRANSLATIONS = {
     }
 }
 
-# Курсы валют для конвертации
-CURRENCY_RATES = {
-    'RUB': 1.0,
-    'USD': 0.011,
-}
-
-CURRENCY_SYMBOLS = {
-    'RUB': '₽',
-    'USD': '$',
-}
-
-# Система приоритетов пользователей
-USER_PRIORITY = {
-    'admin': 100,
-    'vip': 80,
-    'long': 60,
-    'short': 60,
-    'free': 20
-}
-
-# Таймауты сканирования в секундах
-SCAN_TIMEOUTS = {
-    'admin': 10,
-    'vip': 15,
-    'long': 20,
-    'short': 20,
-    'free': 45
-}
-
-# АКТУАЛЬНЫЕ АКТИВЫ POCKET OPTION
+# АКТУАЛЬНЫЕ АКТИВЫ POCKET OPTION с указанием типа (OTC/обычный) и доходности
 MARKET_ASSETS = {
+    # Криптовалюты OTC (приоритет - максимальная доходность 92%)
     "crypto_otc": {
         "BTC/USD OTC": {"symbol": "BTC-USD", "type": "otc", "payout": 92},
         "ETH/USD OTC": {"symbol": "ETH-USD", "type": "otc", "payout": 92},
@@ -168,6 +143,8 @@ MARKET_ASSETS = {
         "BNB/USD OTC": {"symbol": "BNB-USD", "type": "otc", "payout": 92},
         "TON/USD OTC": {"symbol": "TON11419-USD", "type": "otc", "payout": 92},
     },
+    
+    # Криптовалюты обычные (85% доходность)
     "crypto": {
         "BTC/USD": {"symbol": "BTC-USD", "type": "regular", "payout": 85},
         "ETH/USD": {"symbol": "ETH-USD", "type": "regular", "payout": 85},
@@ -176,12 +153,16 @@ MARKET_ASSETS = {
         "ADA/USD": {"symbol": "ADA-USD", "type": "regular", "payout": 85},
         "BNB/USD": {"symbol": "BNB-USD", "type": "regular", "payout": 85},
     },
+    
+    # Форекс OTC (92% доходность)
     "forex_otc": {
         "EUR/USD OTC": {"symbol": "EURUSD=X", "type": "otc", "payout": 92},
         "GBP/USD OTC": {"symbol": "GBPUSD=X", "type": "otc", "payout": 92},
         "USD/JPY OTC": {"symbol": "JPY=X", "type": "otc", "payout": 92},
         "AUD/USD OTC": {"symbol": "AUDUSD=X", "type": "otc", "payout": 92},
     },
+    
+    # Форекс обычные (85% доходность)
     "forex": {
         "EUR/USD": {"symbol": "EURUSD=X", "type": "regular", "payout": 85},
         "GBP/USD": {"symbol": "GBPUSD=X", "type": "regular", "payout": 85},
@@ -194,10 +175,14 @@ MARKET_ASSETS = {
         "EUR/JPY": {"symbol": "EURJPY=X", "type": "regular", "payout": 85},
         "GBP/JPY": {"symbol": "GBPJPY=X", "type": "regular", "payout": 85},
     },
+    
+    # Акции OTC (92% доходность)
     "stocks_otc": {
         "AAPL OTC": {"symbol": "AAPL", "type": "otc", "payout": 92},
         "INTC OTC": {"symbol": "INTC", "type": "otc", "payout": 92},
     },
+    
+    # Акции обычные (85% доходность)
     "stocks": {
         "AAPL": {"symbol": "AAPL", "type": "regular", "payout": 85},
         "MSFT": {"symbol": "MSFT", "type": "regular", "payout": 85},
@@ -207,10 +192,14 @@ MARKET_ASSETS = {
         "INTC": {"symbol": "INTC", "type": "regular", "payout": 85},
         "BA": {"symbol": "BA", "type": "regular", "payout": 85},
     },
+    
+    # Товары и индексы OTC (высокая доходность)
     "commodities_otc": {
         "GOLD OTC": {"symbol": "GC=F", "type": "otc", "payout": 80},
         "AUS200 OTC": {"symbol": "^AXJO", "type": "otc", "payout": 67},
     },
+    
+    # Товары и индексы обычные (36-85%)
     "commodities": {
         "XAU/USD": {"symbol": "GC=F", "type": "regular", "payout": 85},
         "XAG/USD": {"symbol": "SI=F", "type": "regular", "payout": 85},
@@ -223,3 +212,36 @@ MARKET_ASSETS = {
         "FTSE": {"symbol": "^FTSE", "type": "regular", "payout": 85},
     }
 }
+
+# Таймфреймы
+TIMEFRAMES = {
+    "1M": "1m", "2M": "2m", "3M": "3m", "5M": "5m", "15M": "15m", 
+    "30M": "30m", "1H": "1h", "4H": "4h", 
+    "1D": "1d", "1W": "1wk"
+}
+
+SHORT_TIMEFRAMES = ["1M", "2M", "3M", "5M", "15M", "30M"]
+LONG_TIMEFRAMES = ["1H", "4H", "1D", "1W"]
+
+# Система приоритетов пользователей
+USER_PRIORITY = {
+    'admin': 100,
+    'vip': 80,
+    'long': 60,
+    'short': 60,
+    'free': 20
+}
+
+# Таймауты сканирования в секундах по приоритету
+SCAN_TIMEOUTS = {
+    'admin': 10,
+    'vip': 15,
+    'long': 20,
+    'short': 20,
+    'free': 45
+}
+
+# Кэш и константы
+CACHE_DURATION = 180  # Кэш на 3 минуты
+MAX_RECENT_ASSETS = 5  # Максимум последних активов для исключения
+MAX_CONSECUTIVE_LOSSES = 2  # Максимум проигрышей подряд перед блокировкой
